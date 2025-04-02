@@ -82,28 +82,32 @@ especiais.
 
 
 def registrar_venda(estoque, vendas):
-    print('\n*** Registro de Vendas ***')
+    print('\n*** Registro de Vendas ***\n')
     while True:
-        try:
-            codigo = int(input('Entre com o codigo: '))
-            break
-        except ValueError:
-            print('Dado incorreto! Por favor, insira um número inteiro para o código.')
-    if codigo in estoque:
         while True:
             try:
-                venda = int(input('Entre com a quantidade de itens vendidos: '))
+                codigo = int(input('Entre com o codigo: '))
                 break
             except ValueError:
-                print('Dado incorreto! Por favor, insira um número inteiro.')
-        if estoque[codigo]['quantidade'] >= venda:
-            estoque[codigo]['quantidade'] -= venda # estoque[codigo]['quantidade'] = estoque[codigo]['quantidade'] - venda
-            vendas.append({'codigo':codigo, 'quantidade':venda, 'categoria':estoque[codigo]['categoria']})
-            print('Venda efetuada!')
+                print('Dado incorreto! Por favor, insira um número inteiro para o código.')
+        if codigo in estoque:
+            while True:
+                try:
+                    venda = int(input('Entre com a quantidade de itens vendidos: '))
+                    break
+                except ValueError:
+                    print('Dado incorreto! Por favor, insira um número inteiro.')
+            if estoque[codigo]['quantidade'] >= venda:
+                estoque[codigo]['quantidade'] -= venda # estoque[codigo]['quantidade'] = estoque[codigo]['quantidade'] - venda
+                vendas.append({'codigo':codigo, 'quantidade':venda, 'categoria':estoque[codigo]['categoria']})
+                print('Venda efetuada!')
+            else:
+                print('Não foi possivel vender o produto, estoque em baixa.')
         else:
-            print('Não foi possivel vender o produto, estoque em baixa.')
-    else:
-        print('Produto não localizado.')
+            print('Produto não localizado.')
+        continuar = input('Deseja continuar: (S/N): ').upper().strip()
+        if continuar != 'S':
+            print('Venda finalizada.')
 # registrar_venda(estoque, vendas)
 
 
@@ -129,7 +133,7 @@ def consulta_item(estoque):
 def relatorio_de_items_em_Baixa(estoque):
     print('\n*** Produtos do estoque em baixa ***\n')
     for codigo, info, in estoque.items():
-        if int(info['quantidade']) < 5:
+        if info['quantidade'] < 5:
           print(f'Código: {codigo}\nNome: {info["nome"]}\nQuantidade: {info["quantidade"]}')
 # relatorio_de_items_em_Baixa(estoque)    
 
