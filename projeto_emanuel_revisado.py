@@ -38,29 +38,40 @@ def login():
 
 def cadastro_item(estoque, categorias): # cadastro de items no estoque por categoria.
     print('\n*** Cadastro de produtos ***\n')
+    
     while True:
-            try: # 1 
-                codigo = int(input('Entre com o codigo: '))
+        while True:
+                try: # 1 
+                    codigo = int(input('Entre com o codigo: '))
+                    if codigo in estoque:
+                        print(f'O codigo {codigo} ja existe, por favor entre com novo codigo.\n')
+                        continue
+                    break
+                except ValueError:
+                    print('Dado incorreto! Por favor, insira um número inteiro para o código.')
+        nome = input('Entre com o nome do produto: ').upper()
+        categoria = input('Entre com a categoria: ').upper()
+        while True:
+            try: # 1
+                quantidade = int(input('Quantidade do item: '))
                 break
             except ValueError:
-                print('Dado incorreto! Por favor, insira um número inteiro para o código.')
-    nome = input('Entre com o nome do produto: ').upper()
-    categoria = input('Entre com a categoria: ').upper()
-    while True:
-        try: # 1
-            quantidade = int(input('Quantidade do item: '))
+                print('Dado incorreto! Por favor, insira um número inteiro.')
+        while True:
+            try: # 1
+                valor = float(input('Entre com o valor R$ '))
+                break
+            except ValueError:
+                print('Dado incorreto! Por favor, insira um número inteiro ou flutuante.')
+        estoque[codigo] = {'nome':nome, 'categoria':categoria, 'quantidade':quantidade, 'valor':valor}
+        categorias.add(categoria)
+        print(f'\nproduto "{nome}" foi cadastrado com sucesso!\n')
+        continuar = input('Deseja continuar? (S/N): ').upper().strip()
+        if continuar != 'S': 
+            print('Cadastro Finalizado')
             break
-        except ValueError:
-            print('Dado incorreto! Por favor, insira um número inteiro para o código.')
-    while True:
-        try: # 1
-            valor = float(input('Entre com o valor R$ '))
-            break
-        except ValueError:
-            print('Dado incorreto! Por favor, insira um número inteiro ou flutuante.')
-    estoque[codigo] = {'nome':nome, 'categoria':categoria, 'quantidade':quantidade, 'valor':valor}
-    categorias.add(categoria)
-    print(f'\nproduto "{nome}" foi cadastrado com sucesso!')
+
+
 '''
 # 1 estou usando ele para validar a entrada, assim caso o usuario entre com string não pare, 
 usei desta forma também para o colaborador / usuario indentificar qual o campo esta errando. Não
@@ -203,3 +214,6 @@ def main():
             print('\nDado incorreto')
 if __name__ == "__main__":
     main()
+
+
+

@@ -12,12 +12,13 @@ def cadastro_item(estoque, categorias):
   criei o cadastro de itens com o validador ('try' e o 'except ValueError') para numeros inteiros e flutuantes, as strings não vi a necessidade de fazer isso, 
   pode haver cadastro errado por conta do colaborador, isso na entrada do 'nome' e 'categoria' do produto, mas codigo, quantidade e valor, se entrar com 
   caracteres sem ser inteiro ou flutuante, vai chamar o erro "Dado incorreto! Por favor, insira um número inteiro ou flutuante."
+  Obs: adicionei um novo lop (while True) no cadstro de items, para caso o usúario adicione um codigo existente ele avisar que ja esta em uso, para não subescrever o mesmo.
 
 
 def registrar_venda(estoque, vendas):
   no registro de vendas, tambem usei o try e o except ValueError caso o colaborador entrar com dado errado, aqui vai registrar toda a venda e a baixa no estoque após ela
 
+pretendo continuar
 
-irei continuar apos o treino.
   
   
